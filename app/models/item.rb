@@ -7,6 +7,7 @@ class Item < ApplicationRecord
   belongs_to :delivery_charge
   belongs_to :area
   belongs_to :delivery_time
+  has_one    :shopping
 
   validates :image, presence: true
   validates :item_name, presence: true
