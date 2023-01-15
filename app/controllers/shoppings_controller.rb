@@ -2,9 +2,12 @@ class ShoppingsController < ApplicationController
 
   def index
     @shopping_shipping_address = ShoppingShippingAddress.new
+    @item = Item.find(params[:item_id])
+
   end
   
   def create
+    @item = Item.find(params[:item_id])
     @shopping_shipping_address = ShoppingShippingAddress.new(shopping_params)
     if @shopping_shipping_address.valid?
       @shopping_shipping_address.save
