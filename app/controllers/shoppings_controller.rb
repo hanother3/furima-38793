@@ -1,16 +1,15 @@
 class ShoppingsController < ApplicationController
   before_action :authenticate_user!
+  before_action :set_pay, only: [:index, :create]
 
   def index
-    @item = Item.find(params[:item_id])
-    if current_user == @item.user
+    if current_user == @item.user || @item.shopping.present?
       redirect_to root_path 
     end
     @shopping_shipping_address = ShoppingShippingAddress.new
   end
   
   def create
-    @item = Item.find(params[:item_id])
     @shopping_shipping_address = ShoppingShippingAddress.new(shopping_params)
     if @shopping_shipping_address.valid?
       pay_item
@@ -35,5 +34,9 @@ class ShoppingsController < ApplicationController
       currency: 'jpy'
     )
   end  
+
+  def set_pay
+    @item = Item.find(params[:item_id])
+  end
 
 end
