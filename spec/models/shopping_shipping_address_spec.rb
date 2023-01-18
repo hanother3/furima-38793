@@ -55,6 +55,16 @@ RSpec.describe ShoppingShippingAddress, type: :model do
         @shopping_shipping_address.valid?
         expect(@shopping_shipping_address.errors.full_messages).to include('Phone number is invalid')
       end
+      it 'phone_numberが12桁以上だと保存できないこと' do
+        @shopping_shipping_address.phone_number = '123456789012'
+        @shopping_shipping_address.valid?
+        expect(@shopping_shipping_address.errors.full_messages).to include('Phone number is invalid')
+      end
+      it 'phone_numberが半角数字以外が含まれていると保存できないこと' do
+        @shopping_shipping_address.phone_number = '090-1234-5678'
+        @shopping_shipping_address.valid?
+        expect(@shopping_shipping_address.errors.full_messages).to include('Phone number is invalid')
+      end
       it 'userが紐付いていないと保存できないこと' do
         @shopping_shipping_address.user_id = nil
         @shopping_shipping_address.valid?
