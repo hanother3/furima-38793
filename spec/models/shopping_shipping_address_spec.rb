@@ -53,7 +53,7 @@ RSpec.describe ShoppingShippingAddress, type: :model do
       it 'phone_numberが9桁以下だと保存できないこと' do
         @shopping_shipping_address.phone_number = '123456789'
         @shopping_shipping_address.valid?
-        expect(@shopping_shipping_address.errors.full_messages).to include("Phone number is invalid")
+        expect(@shopping_shipping_address.errors.full_messages).to include('Phone number is invalid')
       end
       it 'userが紐付いていないと保存できないこと' do
         @shopping_shipping_address.user_id = nil
@@ -63,9 +63,9 @@ RSpec.describe ShoppingShippingAddress, type: :model do
       it 'itemが紐付いていないと保存できないこと' do
         @shopping_shipping_address.item_id = nil
         @shopping_shipping_address.valid?
-        expect(@shopping_shipping_address.errors.full_messages).to include("Item can't be blank")  
+        expect(@shopping_shipping_address.errors.full_messages).to include("Item can't be blank")
       end
-      it "tokenが空では登録できないこと" do
+      it 'tokenが空では登録できないこと' do
         @shopping_shipping_address.token = nil
         @shopping_shipping_address.valid?
         expect(@shopping_shipping_address.errors.full_messages).to include("Token can't be blank")
