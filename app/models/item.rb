@@ -9,10 +9,10 @@ class Item < ApplicationRecord
   belongs_to :delivery_time
   has_one    :shopping, dependent: :destroy
 
-  validates :image, presence: true
-  validates :item_name, presence: true
-  validates :item_description, presence: true
-  validates :price, presence: true
+  with_options presence: true do
+    validates :image, :item_name, :item_description, :price
+  end  
+
   validates :price, numericality: { only_integer: true, greater_than_or_equal_to: 300, less_than_or_equal_to: 9_999_999 }
 
   validates :category_id, numericality: { other_than: 1, message: "can't be blank" }
